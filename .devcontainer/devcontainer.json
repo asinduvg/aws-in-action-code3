@@ -1,0 +1,16 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/devcontainers/features/aws-cli:1": {}
+	},
+	"postCreateCommand": "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID && aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY && aws configure set region $AWS_DEFAULT_REGION && curl -Lo qldb https://github.com/awslabs/amazon-qldb-shell/releases/latest/download/qldb-cli-linux-x64 && sudo mv qldb /usr/local/bin/qldb && sudo chmod +x /usr/local/bin/qldb && qldb completion bash > ~/.qldb-completion.bash && echo 'source ~/.qldb-completion.bash' >> ~/.bashrc",
+	"customizations": {
+		"codespaces": {
+			"env": {
+				"AWS_ACCESS_KEY_ID": "${{ secrets.AWS_ACCESS_KEY_ID }}",
+				"AWS_SECRET_ACCESS_KEY": "${{ secrets.AWS_SECRET_ACCESS_KEY }}",
+				"AWS_DEFAULT_REGION": "${{ secrets.AWS_DEFAULT_REGION }}"
+			}
+		}
+	}
+}
